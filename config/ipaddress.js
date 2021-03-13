@@ -9,7 +9,9 @@ const iplist = {
 
   maam_tejada: `192.168.43.15`,
 
-  thesis:`192.168.43.68`
+  thesis:`192.168.43.68`,
+
+  macbook: `192.168.100.6`,
 }
 
-module.exports = iplist.malis;
+module.exports = iplist.macbook;

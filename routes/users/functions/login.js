@@ -8,6 +8,8 @@ login = ({res, loginCred, pool, _sql ,bcrypt, jwt, secretkey}) => {
         var params = [ username, password ];
 
         pool.getConnection( (err,connection) => {
+
+            console.log('CONNECTION IN LOGIN ERROR: ', err ? err : 'NO ERROR')
             
             if(err) {
                 res.json({error});             
