@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors');
 
 const ipAdd = require('./config/ipaddress');
-
+const port = 4040;
 const ip_v4 = ipAdd;
 
 const app = express();
@@ -47,6 +47,6 @@ app.use(sms, require('./routes/sms/DepartmentClearance/DepartmentClearance'));
 
 app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 
-app.listen(4040,ip_v4);
+app.listen(port,ip_v4);
 
-console.log(`Server is Running in ${ip_v4}`);
+console.log(`Server is Running in ${ip_v4}:${port}`);
