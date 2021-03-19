@@ -1,17 +1,2 @@
-const iplist = {
-  workable:`172.51.1.64`, 
-
-  malis:`192.168.254.105`,
-
-  marick:`192.168.100.10`,
-
-  localhost: `127.0.0.1`,
-
-  maam_tejada: `192.168.43.15`,
-
-  thesis:`192.168.43.68`,
-
-  macbook: `192.168.100.6`,
-}
-
-module.exports = iplist.macbook;
+const iplist = `192.168.100.6`; // <--- Edit this, this  your ipV4 ipaddress here
+module.exports = iplist;
