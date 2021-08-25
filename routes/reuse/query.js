@@ -11,6 +11,10 @@ const sqlPoolPromise = (sql, params) => {
                         connection.destroy();
         
                         if(err) {
+                            console.log('QUERY SQL ERROR: ', {
+                                sqlMessage:err?.sqlMessage,
+                                sql: err?.sql
+                            } ||  `SQL QUERY error in routes/reuse/query`);
                             reject(null);
                             
                         } else {
