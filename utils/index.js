@@ -1,0 +1,1 @@
+module.exports.getIpAddress = require('./getIpAddress');
