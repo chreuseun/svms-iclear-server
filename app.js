@@ -47,6 +47,8 @@ app.use(sms, require('./routes/sms/DepartmentClearance/DepartmentClearance'));
 
 app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 
-app.listen(port,ip_v4);
 
-console.log(`Server is Running in ${ip_v4}:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT,ip_v4);
+
+console.log(`Server is Running in ${ip_v4}:${PORT}`);
