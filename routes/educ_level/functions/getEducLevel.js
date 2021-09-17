@@ -41,7 +41,7 @@ const asynGetDeptType = async ({res, token, params}) => {
                             name as 'text',
                             id as 'value',
                             code
-                        FROM iclear_svms_db.educ_level
+                        FROM heroku_ca66fe3f54014ac.educ_level
                         
                         WHERE state = 1`
 
