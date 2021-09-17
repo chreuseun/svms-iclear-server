@@ -13,8 +13,6 @@ router.post('/login', (req, res) => {
   
     let login = require('./functions/login');
 
-    console.log('---- #1',req.body)
-
     const arg = {
         res,
         loginCred: req.body,
@@ -24,9 +22,6 @@ router.post('/login', (req, res) => {
         jwt,
         secretkey
     }
-
-    console.log('---- #2')
-
 
     login(arg)
 
