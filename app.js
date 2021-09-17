@@ -49,6 +49,8 @@ app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT,ip_v4);
+app.listen(PORT,()=>{
+    console.log('----- ICLEAR SERVER IS LISTENER ')
+});
 
 console.log(`Server is Running in ${ip_v4}:${PORT}`);
