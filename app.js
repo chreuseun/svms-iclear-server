@@ -1,10 +1,12 @@
 const express = require('express');
-var bodyParser = require('body-parser')
-var cors = require('cors');
+const bodyParser = require('body-parser')
+const cors = require('cors');
 
+const {endPointWebApp,mobile,sms} = require('./config/routes')
 const ipAdd = require('./config/ipaddress');
-const port = 4040;
+
 const ip_v4 = ipAdd;
+
 
 const app = express();
 
@@ -16,9 +18,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const endPointWebApp = '/api';
-const mobile = '/api/mobile';
-const sms = '/api/sms';
+
 
 // ROUTES
 app.use(endPointWebApp, require('./routes/users/login'));  // USERS
