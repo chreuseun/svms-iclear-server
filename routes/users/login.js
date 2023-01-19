@@ -36,7 +36,6 @@ router.post('/login', (req, res) => {
 
 // register new user
 router.post('/register', (req, res) => {
-
     var body=[
         req.body.user_type_id, 
         req.body.username,
@@ -48,12 +47,6 @@ router.post('/register', (req, res) => {
         req.body.contact_number
     ]
 
-    body.map( (item, i) => {
-        if(item === undefined)
-        {
-            body = undefined
-        }
-    })
 
     let token = req.headers.authorization 
 
