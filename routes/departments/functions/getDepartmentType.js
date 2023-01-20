@@ -21,7 +21,6 @@ const asynGetDeptType = async ({res, token, params}) => {
     } catch(err) {
         error  = true; 
     }
-    
     if(!jwtResult) {
         error  = true; 
     }
@@ -36,7 +35,7 @@ const asynGetDeptType = async ({res, token, params}) => {
     try{
         if(sqlResult[0].is_token === 'AUTH') {
 
-            let sql = `SELECT id as 'key' , name as 'text' , id as 'value'  FROM heroku_ca66fe3f54014ac.departments_type WHERE id != 1`
+            let sql = `SELECT id as 'key' , name as 'text' , id as 'value'  FROM departments_type WHERE id != 1`
             sqlResult = await query(sql, [])
         }
     } catch (err){

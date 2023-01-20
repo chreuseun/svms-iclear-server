@@ -89,7 +89,7 @@ let _sql = {
                     SET @yearlevel := ?;
                     SET @course := ?;
                     
-                    INSERT INTO heroku_ca66fe3f54014ac.subject_detail
+                    INSERT INTO subject_detail
                     (
                         name,
                         code,

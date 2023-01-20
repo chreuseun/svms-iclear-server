@@ -76,7 +76,7 @@ let _sql = {
                     SET @subject_detail_id := ?;
                     SET @section := ?;
                     
-                    INSERT INTO heroku_ca66fe3f54014ac.subject
+                    INSERT INTO subject
                     (
                         authored_account_id,
                         teacher_account_id,
