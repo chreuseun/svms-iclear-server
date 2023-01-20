@@ -77,19 +77,18 @@ const promisRegister = async ({res, token, insertParams}) => {
         error  = true;   
     }
 
-    // <INSERT QUERY>
     try {
         let sql =  require('../../../mysql/queries/accounts/Login');
         sqlResult = await sqlPoolPromise(sql.insert_new_user, insertParams);
     } catch(err) {
-        error  = true;   
-    
+        error = true;
+
     }
 
 
 
     error ? 
-        res.sendStatus(404) : 
+        res.sendStatus(404): 
         res.json({sqlResult})
 }
 
