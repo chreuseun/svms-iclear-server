@@ -7,11 +7,9 @@ const secretkey = require('../../auth/secretkey');
 const pool = require('../../mysql/pool/pool');
 const _sql = require('../../mysql/queries/accounts/Login');
 
+const { pingPost } = require('./functions')
 
-router.post('/ping', (_, res) => {  
-    res.json({msg:"success api/ping"})
-    console.log('> POST - /api/ping ');
-})
+router.post('/ping', pingPost)
 
 router.post('/login', (req, res) => {
     
