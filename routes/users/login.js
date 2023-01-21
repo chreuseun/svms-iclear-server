@@ -163,4 +163,20 @@ router.post('/accounts/islocked/set', (req, res) => {
     console.log('> POST - /api/accounts/islocked/set')
 })
 
+// ******* REFACTOR SIDE *** 
+
+router.get('/auth', (req,res)=>{
+    let isLogged = require('./functions/refactorCheckToken');
+    
+    arg = {
+        token : req.headers.authorization,
+        res ,
+        params: []
+    }
+
+    isLogged(arg)
+
+    console.log( `Methed: ${req.route.stack[0].method}  ${req.route.path}`);
+})
+
 module.exports = router
