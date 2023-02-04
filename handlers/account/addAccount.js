@@ -1,12 +1,25 @@
 const bcrypt = require('bcryptjs');
 
 const {
-    decodeJWTToken,
-    mySQLCommander
+    mySQLCommander,
+    validateJWTToken,
 } = require('../../utils')
 const {SALT_COUNT} = require('../../config/bcrypt')
+const {INSERT_ONE_ACCOUNT} = require('../../config/sqlOperations')
 
-
+/*
+    *** Test Params ***
+    const sqlParams = [
+        'ADMIN',
+        'TEST_ADMIN_12', 
+        bcrypt.hashSync('password', SALT_COUNT),
+        'VENTURA, SAI BULAONG',
+        'VENTURA',
+        'SAI',
+        'BULAONG' || '',
+        '09223145678'
+    ]
+*/
 
 const addAccount = async ( request , response ) => {
     let success = false
@@ -14,11 +27,7 @@ const addAccount = async ( request , response ) => {
 
     try{
         const jwtToken =request?.headers?.authorization
-        const jwt = decodeJWTToken(jwtToken)
-
-        if(!jwt){
-            throw new Error('Invalid Authorization Token')
-        }
+        validateJWTToken(jwtToken)
 
         const {
             user_type_id,
@@ -32,7 +41,7 @@ const addAccount = async ( request , response ) => {
  
         const fullName = `${lastname}, ${firstname} ${middlename || ''}`
 
-        const body = [
+        const sqlParams = [
             user_type_id,
             username, 
             bcrypt.hashSync(password, SALT_COUNT),
@@ -43,37 +52,35 @@ const addAccount = async ( request , response ) => {
             contact_number
         ]
 
-        console.log('--- START SQL')
-        const data =   await mySQLCommander({
-            sqlQuery: null
+        const {
+            error_message_sql,
+            success_sql,
+            results_sql
+        } = await mySQLCommander({
+            sqlQuery: INSERT_ONE_ACCOUNT,
+            params: sqlParams
         })
-        
-
-        success = !!jwt
-
-        
-
 
         response.json({
-            success,
-            error_message,
+            success: success_sql,
+            error_message: error_message_sql,
+            data:{ 
+                results: results_sql
+            },
             route: request.route,
-            body,
-            data
+        
         });
 
     } catch (err){
         error_message = `${err}`
-
         response.json({
             success,
             error_message,
+            data: null,
             route: request.route,
+
         });
     }
-
- 
-
 
     console.log(`** ${request.method}: ${JSON.stringify(request.route,null,4)}`)
 }
