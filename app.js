@@ -2,18 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors');
 
-const {endPointWebApp,mobile,sms} = require('./config/routes')
+const {endPointWebApp,mobile,sms, v2} = require('./config/routes')
 const ipAdd = require('./config/ipaddress');
+const accountRouter = require('./routes/_v2/account');
 
 const ip_v4 = ipAdd;
-
-
 const app = express();
 
 app.use('/static' , express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: true }))
-,
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -47,6 +45,8 @@ app.use(sms, require('./routes/sms/DepartmentClearance/DepartmentClearance'));
 
 app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 
+/* VERSION 2 REWORK APIS */
+app.use(v2, accountRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
