@@ -6,6 +6,7 @@ const {endPointWebApp,mobile,sms, v2} = require('./config/routes')
 const ipAdd = require('./config/ipaddress');
 const accountRouter = require('./routes/_v2/account');
 const departmentRouter = require('./routes/_v2/departments');
+const educationLevelsRouter = require('./routes/_v2/educationLevels');
 
 const ip_v4 = ipAdd;
 const app = express();
@@ -49,6 +50,7 @@ app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 /* VERSION 2 REWORK APIS */
 app.use(v2, accountRouter)
 app.use(v2, departmentRouter)
+app.use(v2, educationLevelsRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{

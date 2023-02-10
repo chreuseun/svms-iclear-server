@@ -1,6 +1,3 @@
-/*
- - /api/departmentstype/get
-*/
 const express = require('express')
 
 const {ROUTERS} = require('../../config/routers')
