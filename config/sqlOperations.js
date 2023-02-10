@@ -90,9 +90,21 @@ WHERE state LIKE @state
     AND DATE(created_at) <= @dateEnd
 `
 
+const SELECT_DEPARTMENTS_TYPES = `
+    SELECT 
+        id as 'key',
+        name as 'text',
+        id as 'value'
+    
+    FROM departments_type 
+    
+    WHERE 
+        id != 1
+`
 
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
-    SELECT_USERS_BY_FILTER_WITH_DATES
+    SELECT_USERS_BY_FILTER_WITH_DATES,
+    SELECT_DEPARTMENTS_TYPES
 }

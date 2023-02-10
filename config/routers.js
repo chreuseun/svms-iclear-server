@@ -1,5 +1,6 @@
 const ROUTERS = {
-    account: '/account'
+    account: '/account',
+    departments: '/departments',
 }
 
 module.exports = {
