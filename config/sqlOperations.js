@@ -93,7 +93,7 @@ WHERE state LIKE @state
 const SELECT_DEPARTMENTS_TYPES = `
 SELECT 
     id as 'key',
-    name as 'text',
+    name as 'label',
     id as 'value'
 
 FROM departments_type 
@@ -105,7 +105,7 @@ WHERE
 const SELECT_EDUCATION_LEVELS = `
 SELECT 
     id as 'key',
-    name as 'text',
+    name as 'label',
     id as 'value',
     code
 
@@ -163,6 +163,9 @@ ORDER BY
     yearlevel ASC
 `
 
+const GET_ALL_COURSES  =`
+    SELECT * FROM course WHERE state = 1;
+`
 
 module.exports = {
     INSERT_ONE_ACCOUNT,
@@ -171,5 +174,6 @@ module.exports = {
     SELECT_DEPARTMENTS_TYPES,
     SELECT_EDUCATION_LEVELS,
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_COURSE,
-    SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL
+    SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL,
+    GET_ALL_COURSES
 }

@@ -7,6 +7,7 @@ const ipAdd = require('./config/ipaddress');
 const accountRouter = require('./routes/_v2/account');
 const departmentRouter = require('./routes/_v2/departments');
 const educationLevelsRouter = require('./routes/_v2/educationLevels');
+const coursesRouter = require('./routes/_v2/courses');
 
 const ip_v4 = ipAdd;
 const app = express();
@@ -51,6 +52,7 @@ app.use('/',require('./routes/test/test')) // TEST FOR TESTING
 app.use(v2, accountRouter)
 app.use(v2, departmentRouter)
 app.use(v2, educationLevelsRouter)
+app.use(v2, coursesRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
