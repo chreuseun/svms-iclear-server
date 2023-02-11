@@ -164,11 +164,9 @@ router.post('/accounts/islocked/set', (req, res) => {
 })
 
 // ******* REFACTOR SIDE *** 
-
 router.get('/auth', (req,res)=>{
     let isLogged = require('./functions/refactorCheckToken');
-    
-    arg = {
+        arg = {
         token : req.headers.authorization,
         res ,
         params: []
