@@ -1,12 +1,13 @@
 const express = require('express')
 
 const {ROUTERS} = require('../../config/routers')
-const { getDepartmentTypes, addOneDepartment } = require('../../handlers/department')
+const { getDepartmentTypes, addOneDepartment, getAllDepartmentsByFilter } = require('../../handlers/department')
 const departmentsRouter =express.Router()
 
 
 // GET METHODS
 departmentsRouter.get('/types', getDepartmentTypes)
+departmentsRouter.get('/', getAllDepartmentsByFilter)
 
 // POST METHODS
 departmentsRouter.post('/add', addOneDepartment)

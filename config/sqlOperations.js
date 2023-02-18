@@ -191,6 +191,24 @@ v2_departments (
 
 `
 
+const GET_ALL_DEPARTMENTS_WITH_FILTER = `
+SET @dept_name := ?;
+SET @is_active := ?;
+
+
+SELECT 
+    v2Departments.*,
+    educLevel.name as 'educ_level_name'
+    
+FROM v2_departments AS v2Departments
+JOIN educ_level AS educLevel 
+ON v2Departments.educ_level_id = educLevel.id
+
+WHERE 
+	v2Departments.is_active LIKE @is_active
+    AND v2Departments.name LIKE @dept_name;
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -200,5 +218,6 @@ module.exports = {
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_COURSE,
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL,
     GET_ALL_COURSES,
-    INSERT_ONE_DEPARTMENT_V2
+    INSERT_ONE_DEPARTMENT_V2,
+    GET_ALL_DEPARTMENTS_WITH_FILTER
 }
