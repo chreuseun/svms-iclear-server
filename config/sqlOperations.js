@@ -197,6 +197,7 @@ SET @is_active := ?;
 
 
 SELECT 
+    v2Departments.id as 'key',
     v2Departments.*,
     educLevel.name as 'educ_level_name'
     
