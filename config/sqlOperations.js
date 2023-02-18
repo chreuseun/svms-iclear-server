@@ -94,7 +94,8 @@ const SELECT_DEPARTMENTS_TYPES = `
 SELECT 
     id as 'key',
     name as 'label',
-    id as 'value'
+    id as 'value',
+    description
 
 FROM departments_type 
 
@@ -142,6 +143,7 @@ ORDER BY
     educ_level_id ASC, 
     course ASC
 `
+
 const SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL = `
 SELECT  
     educ_level_id,
@@ -167,6 +169,28 @@ const GET_ALL_COURSES  =`
     SELECT * FROM course WHERE state = 1;
 `
 
+const INSERT_ONE_DEPARTMENT_V2 = `
+INSERT INTO 
+v2_departments (
+    name,
+    educ_level_id,
+    department_type_id,
+    course_id,
+    year_level,
+    acad_dept_id,
+    department_head_officer
+) VALUES (
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?,
+    ?
+);
+
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -175,5 +199,6 @@ module.exports = {
     SELECT_EDUCATION_LEVELS,
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_COURSE,
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL,
-    GET_ALL_COURSES
+    GET_ALL_COURSES,
+    INSERT_ONE_DEPARTMENT_V2
 }
