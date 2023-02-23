@@ -210,6 +210,23 @@ WHERE
     AND v2Departments.name LIKE @dept_name;
 `
 
+const UPDATE_ONE_DEPARTMENT = `
+UPDATE 
+    v2_departments
+
+SET 
+    name = ?,
+    educ_level_id = ?,
+    department_type_id = ?,
+    course_id = ?,
+    year_level = ?,
+    acad_dept_id = ?,
+    department_head_officer = ?,
+    is_active = ?
+
+WHERE id = ?;
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -220,5 +237,6 @@ module.exports = {
     SELECT_STUDENT_GROUP_BY_EDUC_LEVEL_YEARLEVEL,
     GET_ALL_COURSES,
     INSERT_ONE_DEPARTMENT_V2,
-    GET_ALL_DEPARTMENTS_WITH_FILTER
+    GET_ALL_DEPARTMENTS_WITH_FILTER,
+    UPDATE_ONE_DEPARTMENT
 }
