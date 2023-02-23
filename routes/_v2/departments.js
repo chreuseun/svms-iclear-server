@@ -6,7 +6,9 @@ const {
     addOneDepartment,
     getAllDepartmentsByFilter, 
     updateOneDepartment,
-    getDepartmentsWithAccounts
+    getDepartmentsWithAccounts,
+    deleteAccountToDepartment,
+    activateAccountToDepartment,
 } = require('../../handlers/department')
 const departmentsRouter =express.Router()
 
@@ -19,6 +21,10 @@ departmentsRouter.get('/accounts', getDepartmentsWithAccounts)
 // POST METHODS
 departmentsRouter.post('/add', addOneDepartment)
 departmentsRouter.post('/update', updateOneDepartment)
+departmentsRouter.post('/account/deactivate', deleteAccountToDepartment)
+departmentsRouter.post('/account/activate', activateAccountToDepartment)
+
+
 
 const appUseDepartmentsRouter = express().use(ROUTERS.departments, departmentsRouter)
 
