@@ -284,7 +284,7 @@ SET is_active = 0;
 UPDATE 
 	v2_semester
 SET is_active = 1
-WHERE id = 24
+WHERE id = ?
 `
 
 module.exports = {
