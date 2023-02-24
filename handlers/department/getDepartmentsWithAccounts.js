@@ -27,7 +27,7 @@ const getDepartmentsWithAccounts = async (request, response ) => {
 
         const params = [
             department_id,
-            parseJSONStringToArray(user_type_ids,userTypeIDs )
+            parseJSONStringToArray(user_type_ids, userTypeIDs )
         ]
 
        const {
