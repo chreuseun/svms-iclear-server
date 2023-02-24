@@ -4,6 +4,7 @@ const ROUTERS = {
     educationLevels: '/education_levels',
     courses: '/courses',
     semesters: '/semesters',
+    academicYears: '/academic_years',
 }
 
 module.exports = {

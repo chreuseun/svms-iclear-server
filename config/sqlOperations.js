@@ -287,6 +287,24 @@ SET is_active = 1
 WHERE id = ?
 `
 
+const GET_ALL_ACADEMIC_YEARS = `
+SELECT 
+    * 
+FROM v2_academic_year
+`
+
+const INSERT_ONE_ACADEMIC_YEAR = `
+INSERT INTO v2_academic_year(
+    baseyear,
+    name
+)
+
+VALUES (
+    ? ,
+    ?
+)
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -303,5 +321,7 @@ module.exports = {
     DEACTIVATE_ACCOUNT_TO_DEPARTMENT,
     ACTIVATE_ACCOUNT_TO_DEPARTMENT,
     GET_ALL_SEMESTERS,
-    SET_ACTIVE_SEMESTER
+    SET_ACTIVE_SEMESTER,
+    GET_ALL_ACADEMIC_YEARS,
+    INSERT_ONE_ACADEMIC_YEAR
 }
