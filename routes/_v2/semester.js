@@ -3,6 +3,7 @@ const { ROUTERS } = require('../../config/routers')
 const { getAllSemester,setActiveSemester } = require('../../handlers/semester')
 const semesterRouter = express.Router()
 
+// # GET
 semesterRouter.get('', getAllSemester)
 
 // # POST 
