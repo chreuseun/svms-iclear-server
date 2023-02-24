@@ -8,6 +8,8 @@ const accountRouter = require('./routes/_v2/account');
 const departmentRouter = require('./routes/_v2/departments');
 const educationLevelsRouter = require('./routes/_v2/educationLevels');
 const coursesRouter = require('./routes/_v2/courses');
+const semesterRouter = require('./routes/_v2/semester');
+
 
 const ip_v4 = ipAdd;
 const app = express();
@@ -17,9 +19,6 @@ app.use('/static' , express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(cors());
-
-
-
 
 // ROUTES
 app.use(endPointWebApp, require('./routes/users/login'));  // USERS
@@ -53,6 +52,7 @@ app.use(v2, accountRouter)
 app.use(v2, departmentRouter)
 app.use(v2, educationLevelsRouter)
 app.use(v2, coursesRouter)
+app.use(v2, semesterRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{

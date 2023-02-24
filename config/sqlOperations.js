@@ -270,6 +270,11 @@ VALUES(
 )
 `
 
+const GET_ALL_SEMESTERS = `
+SELECT 
+    * 
+FROM v2_semester;
+`
 
 module.exports = {
     INSERT_ONE_ACCOUNT,
@@ -286,4 +291,5 @@ module.exports = {
     SELECT_ALL_ACCOUNT_IN_DEPARTMENTS,
     DEACTIVATE_ACCOUNT_TO_DEPARTMENT,
     ACTIVATE_ACCOUNT_TO_DEPARTMENT,
+    GET_ALL_SEMESTERS
 }
