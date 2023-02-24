@@ -1,9 +1,12 @@
 const express = require('express')
 const { ROUTERS } = require('../../config/routers')
-const { getAllSemester } = require('../../handlers/semester')
+const { getAllSemester,setActiveSemester } = require('../../handlers/semester')
 const semesterRouter = express.Router()
 
-semesterRouter.get('',getAllSemester)
+semesterRouter.get('', getAllSemester)
+
+// # POST 
+semesterRouter.post('/set', setActiveSemester)
 
 const appUseSemesters = express().use( ROUTERS.semesters, semesterRouter )
 

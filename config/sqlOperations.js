@@ -276,6 +276,17 @@ SELECT
 FROM v2_semester;
 `
 
+const SET_ACTIVE_SEMESTER = `
+UPDATE 
+	v2_semester
+SET is_active = 0;
+
+UPDATE 
+	v2_semester
+SET is_active = 1
+WHERE id = 24
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -291,5 +302,6 @@ module.exports = {
     SELECT_ALL_ACCOUNT_IN_DEPARTMENTS,
     DEACTIVATE_ACCOUNT_TO_DEPARTMENT,
     ACTIVATE_ACCOUNT_TO_DEPARTMENT,
-    GET_ALL_SEMESTERS
+    GET_ALL_SEMESTERS,
+    SET_ACTIVE_SEMESTER
 }
