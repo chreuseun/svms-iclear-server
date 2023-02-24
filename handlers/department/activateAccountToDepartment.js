@@ -20,7 +20,7 @@ const activateAccountToDepartment =  async ( request, response ) => {
             account_id
         } = request?.body || {}
 
-        const unique_id = department_id && account_id ? '' : null
+        const unique_id = !!(department_id && account_id) ? `${department_id}-${account_id}` : null
 
         const {
             error_message_sql,
@@ -39,6 +39,11 @@ const activateAccountToDepartment =  async ( request, response ) => {
             success: success_sql,
             error_message: error_message_sql,
             data: results_sql,
+            param:[
+                unique_id,
+                department_id,
+                account_id,
+            ]
         });
     }catch(err){
         error_message = `${err}`

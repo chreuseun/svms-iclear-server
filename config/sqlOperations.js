@@ -231,20 +231,24 @@ const SELECT_ALL_ACCOUNT_IN_DEPARTMENTS = `
 SELECT 
 	a.username as username,
     a.id as account_id,
-    GROUP_CONCAT(DISTINCT vad.v2_department_id) as department_ids
+    a.user_type_id,
+    vad.v2_department_id as department_id
     
 FROM account as a
 LEFT JOIN v2_account_departments as vad ON a.id = vad.account_id 
 	AND vad.is_deleted = 0
+    AND vad.v2_department_id = ?
 
+WHERE a.user_type_id IN ( ? )
 
-
-GROUP BY a.id`
+GROUP BY a.id
+`
 
 const DEACTIVATE_ACCOUNT_TO_DEPARTMENT = `
 UPDATE v2_account_departments
 
-SET is_deleted = 1
+SET is_deleted = 1,
+    unique_id = NULL
 
 WHERE 
     account_id = ?
@@ -280,5 +284,5 @@ module.exports = {
     UPDATE_ONE_DEPARTMENT,
     SELECT_ALL_ACCOUNT_IN_DEPARTMENTS,
     DEACTIVATE_ACCOUNT_TO_DEPARTMENT,
-    ACTIVATE_ACCOUNT_TO_DEPARTMENT
+    ACTIVATE_ACCOUNT_TO_DEPARTMENT,
 }

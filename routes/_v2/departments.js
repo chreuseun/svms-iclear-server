@@ -24,8 +24,6 @@ departmentsRouter.post('/update', updateOneDepartment)
 departmentsRouter.post('/account/deactivate', deleteAccountToDepartment)
 departmentsRouter.post('/account/activate', activateAccountToDepartment)
 
-
-
 const appUseDepartmentsRouter = express().use(ROUTERS.departments, departmentsRouter)
 
 module.exports = appUseDepartmentsRouter
