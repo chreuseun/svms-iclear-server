@@ -230,6 +230,7 @@ WHERE id = ?;
 const SELECT_ALL_ACCOUNT_IN_DEPARTMENTS = `
 SELECT 
 	a.username as username,
+    a.fullname as fullname,
     a.id as account_id,
     a.user_type_id,
     vad.v2_department_id as department_id
