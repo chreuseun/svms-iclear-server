@@ -12,3 +12,4 @@ module.exports.getAllDepartmentsByFilter = getAllDepartmentsByFilter
 module.exports.updateOneDepartment = updateOneDepartment
 module.exports.getDepartmentsWithAccounts=getDepartmentsWithAccounts
 module.exports.activateAccountToDepartment=activateAccountToDepartment
+module.exports.deleteAccountToDepartment=deleteAccountToDepartment
