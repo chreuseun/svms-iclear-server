@@ -18,6 +18,10 @@ const addOneAcademicYear =  async ( request, response ) => {
             baseyear = null
         } = request?.body || {}
 
+        if(!Number(baseyear)){
+            throw new Error('Invalid baseyear value')
+        }
+
        const {
         error_message_sql,
         results_sql,
