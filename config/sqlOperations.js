@@ -305,6 +305,15 @@ VALUES (
 )
 `
 
+const UPDATE_ACADEMIC_YEAR_BY_ID = `
+UPDATE v2_academic_year
+SET is_active = 0;
+
+UPDATE v2_academic_year
+SET is_active = ?
+WHERE id = ?;
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -323,5 +332,6 @@ module.exports = {
     GET_ALL_SEMESTERS,
     SET_ACTIVE_SEMESTER,
     GET_ALL_ACADEMIC_YEARS,
-    INSERT_ONE_ACADEMIC_YEAR
+    INSERT_ONE_ACADEMIC_YEAR,
+    UPDATE_ACADEMIC_YEAR_BY_ID
 }
