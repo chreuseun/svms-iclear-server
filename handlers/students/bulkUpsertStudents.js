@@ -4,31 +4,6 @@ const {
 } = require('../../utils')
 const { BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY } = require('../../config/sqlOperations')
 
-
-/*
-
-TO INSERT: 
-    acad_dept,
-    acad_year_id,
-    activitycard_id,
-    course_id,
-    educ_level_id,
-    email_address,
-    family_contact_no,
-    family_details_object,
-    gender,
-    image_url,
-    password,
-    section,
-    semester_id,
-    stud_contact_no,
-    stud_firstname,
-    stud_lastname,
-    stud_middlename,
-    username,
-    year_level
-*/
-
 const bulkUpsertStudents =  async ( request, response ) => {
     let success = false
     let error_message = null
@@ -37,27 +12,25 @@ const bulkUpsertStudents =  async ( request, response ) => {
     try{
         const jwtToken =request?.headers?.authorization
         validateJWTToken(jwtToken)
-
         const {
-           student_records_array = []
-        } = request?.body || {}
+            student_records_array = []
+         } = request?.body || {}
 
-    //    const {
-    //     error_message_sql,
-    //     results_sql,
-    //     success_sql
-    //    } =  await mySQLCommander({
-    //         params:[
-    //             student_record_array
-    //         ],
-    //         sqlQuery: SET_ACTIVE_SEMESTER
-    //     });
+       const {
+        error_message_sql,
+        results_sql,
+        success_sql
+       } =  await mySQLCommander({
+            params: [
+                student_records_array
+            ],
+            sqlQuery: BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY
+        });
 
         response.json({
-            success: true, //success_sql,
-            error_message: null, // error_message_sql,
-            data:  student_records_array,// results_sql,
-            query: BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY
+            success: success_sql,
+            error_message:  error_message_sql,
+            data:  results_sql,
         });
     }catch(err){
         error_message = `${err}`
@@ -67,7 +40,6 @@ const bulkUpsertStudents =  async ( request, response ) => {
             error_message,
             data,
             route: request.route,
-
         });
     }
 

@@ -315,26 +315,22 @@ WHERE id = ?;
 `
 
 const BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY = `
-INSERT IGNORE v2_students(
-    acad_dept,
-    acad_year_id,
-    activitycard_id,
-    course_id,
-    educ_level_id,
-    email_address,
-    family_contact_no,
-    family_details_object,
-    gender,
+INSERT v2_students(
+    id,
     image_url,
-    password,
-    section,
-    semester_id,
-    stud_contact_no,
     stud_firstname,
-    stud_lastname,
     stud_middlename,
-    username,
-    year_level
+    stud_lastname,
+    stud_contact_no,
+    family_contact_no,
+    email_address,
+    gender,
+    educ_level_id,
+    acad_dept,
+    course_id,
+    year_level,
+    section,
+    username
 )
 
 VALUES ? 
@@ -346,7 +342,7 @@ ON DUPLICATE KEY UPDATE
     course_id = VALUES(course_id),
     educ_level_id = VALUES(educ_level_id),
     email_address = VALUES(email_address),
-    family_contact_no = VALUES(family_contact_no)
+    family_contact_no = VALUES(family_contact_no),
     family_details_object = VALUES(family_details_object),
     gender = VALUES(gender),
     image_url = VALUES(image_url),
