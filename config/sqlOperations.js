@@ -314,6 +314,49 @@ SET is_active = ?
 WHERE id = ?;
 `
 
+const BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY = `
+INSERT v2_students(
+    id,
+    image_url,
+    stud_firstname,
+    stud_middlename,
+    stud_lastname,
+    stud_contact_no,
+    family_contact_no,
+    email_address,
+    gender,
+    educ_level_id,
+    acad_dept,
+    course_id,
+    year_level,
+    section,
+    username
+)
+
+VALUES ? 
+
+ON DUPLICATE KEY UPDATE 
+    acad_dept = VALUES(acad_dept),
+    acad_year_id = VALUES(acad_year_id),
+    activitycard_id = VALUES(activitycard_id),
+    course_id = VALUES(course_id),
+    educ_level_id = VALUES(educ_level_id),
+    email_address = VALUES(email_address),
+    family_contact_no = VALUES(family_contact_no),
+    family_details_object = VALUES(family_details_object),
+    gender = VALUES(gender),
+    image_url = VALUES(image_url),
+    password = VALUES(password),
+    section = VALUES(section),
+    semester_id = VALUES(semester_id),
+    stud_contact_no = VALUES(stud_contact_no),
+    stud_firstname = VALUES(stud_firstname),
+    stud_lastname = VALUES(stud_lastname),
+    stud_middlename = VALUES(stud_middlename),
+    username = VALUES(username),
+    year_level = VALUES(year_level)    
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -333,5 +376,6 @@ module.exports = {
     SET_ACTIVE_SEMESTER,
     GET_ALL_ACADEMIC_YEARS,
     INSERT_ONE_ACADEMIC_YEAR,
-    UPDATE_ACADEMIC_YEAR_BY_ID
+    UPDATE_ACADEMIC_YEAR_BY_ID,
+    BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY
 }
