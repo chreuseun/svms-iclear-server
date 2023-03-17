@@ -357,6 +357,27 @@ ON DUPLICATE KEY UPDATE
     year_level = VALUES(year_level)    
 `
 
+const GET_ACCOUNT_DETAILS = `
+SELECT 
+	v2d.id as v2_department_id,
+    v2d.name as v2_department_name,
+	a.id as account_id,
+    a.fullname ,
+    a.lastname,
+    a.firstname,
+    a.middlename,
+    a.state AS account_state,
+    a.is_locked AS account_is_locked
+    
+FROM account AS a
+JOIN v2_account_departments AS vad ON
+	vad.account_id = a.id AND vad.is_deleted != 1
+JOIN v2_departments AS v2d ON v2d.id = vad.v2_department_id
+	AND v2d.is_active = 1
+
+WHERE a.id = 135
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -377,5 +398,6 @@ module.exports = {
     GET_ALL_ACADEMIC_YEARS,
     INSERT_ONE_ACADEMIC_YEAR,
     UPDATE_ACADEMIC_YEAR_BY_ID,
-    BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY
+    BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY,
+    GET_ACCOUNT_DETAILS
 }
