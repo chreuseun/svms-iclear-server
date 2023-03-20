@@ -10,19 +10,28 @@ const getAccountAuthorization = async (request, response) => {
         const jwtToken =request?.headers?.authorization
         validateJWTToken(jwtToken)
 
+        const {account_id = null} = request.query
+
        const {
             error_message_sql,
             results_sql,
             success_sql
         } =  await mySQLCommander({
             sqlQuery: GET_ACCOUNT_DETAILS,
-            params: []
+            params: [account_id]
         })
+
+
+        const accountDetails   =results_sql?.[0]||{}
+    
         
         response.json({
             success: success_sql,
             error_message: error_message_sql,
-            data: results_sql,
+            data: {
+                accountDetails,
+                departments:[]
+            },
         });
     }catch(err){
         error_message = `${err}`

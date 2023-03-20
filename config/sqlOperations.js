@@ -357,7 +357,32 @@ ON DUPLICATE KEY UPDATE
     year_level = VALUES(year_level)    
 `
 
+
+
 const GET_ACCOUNT_DETAILS = `
+SELECT 
+    id,         
+    username,   
+    lastname,   
+    middlename, 
+    is_locked,  
+    state,
+    user_type_id,
+    fullname,
+    firstname,
+    contact_number,
+    created_at,
+    updated_at
+
+FROM account 
+
+WHERE
+    id = ?
+`
+
+
+/*
+const GET_ACCOUNT_DEPARTMENT_DETAILS = `
 SELECT 
 	v2d.id as v2_department_id,
     v2d.name as v2_department_name,
@@ -366,6 +391,7 @@ SELECT
     a.lastname,
     a.firstname,
     a.middlename,
+    a.user_type_id,
     a.state AS account_state,
     a.is_locked AS account_is_locked
     
@@ -375,8 +401,9 @@ JOIN v2_account_departments AS vad ON
 JOIN v2_departments AS v2d ON v2d.id = vad.v2_department_id
 	AND v2d.is_active = 1
 
-WHERE a.id = 135
+WHERE a.id = ?
 `
+ */   
 
 module.exports = {
     INSERT_ONE_ACCOUNT,
