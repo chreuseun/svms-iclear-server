@@ -380,30 +380,26 @@ WHERE
     id = ?
 `
 
-
-/*
-const GET_ACCOUNT_DEPARTMENT_DETAILS = `
+const GET_DEPARTMENT_LIST_BY_ACCOUNT_ID = `
 SELECT 
-	v2d.id as v2_department_id,
-    v2d.name as v2_department_name,
-	a.id as account_id,
-    a.fullname ,
-    a.lastname,
-    a.firstname,
-    a.middlename,
-    a.user_type_id,
-    a.state AS account_state,
-    a.is_locked AS account_is_locked
-    
-FROM account AS a
-JOIN v2_account_departments AS vad ON
-	vad.account_id = a.id AND vad.is_deleted != 1
-JOIN v2_departments AS v2d ON v2d.id = vad.v2_department_id
-	AND v2d.is_active = 1
+    v2ad.v2_department_id,
+    v2d.name as v2_departments_name ,
+    v2d.department_head_officer,
+    v2d.educ_level_id,
+    v2d.department_type_id,
+    dt.name as department_type_name
 
-WHERE a.id = ?
+FROM v2_account_departments as v2ad
+JOIN account AS a
+	ON a.id = v2ad.account_id 
+		AND a.id = ?
+        AND v2ad.is_deleted = 0
+JOIN v2_departments as v2d ON
+	v2ad.v2_department_id = v2d.id
+    AND v2d.is_active = 1
+JOIN departments_type AS dt ON
+    dt.id = v2d.department_type_id;
 `
- */   
 
 module.exports = {
     INSERT_ONE_ACCOUNT,
@@ -426,5 +422,6 @@ module.exports = {
     INSERT_ONE_ACADEMIC_YEAR,
     UPDATE_ACADEMIC_YEAR_BY_ID,
     BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY,
-    GET_ACCOUNT_DETAILS
+    GET_ACCOUNT_DETAILS,
+    GET_DEPARTMENT_LIST_BY_ACCOUNT_ID
 }

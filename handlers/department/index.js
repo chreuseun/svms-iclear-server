@@ -5,6 +5,8 @@ const updateOneDepartment = require('./updateOneDepartment')
 const getDepartmentsWithAccounts = require('./getDepartmentsWithAccounts')
 const deleteAccountToDepartment = require('./deleteAccountToDepartment')
 const activateAccountToDepartment = require('./activateAccountToDepartment')
+const getDepartmentsListByAccountID = require('./getDepartmentsListByAccountID')
+
 
 module.exports.getDepartmentTypes = getDepartmentTypes
 module.exports.addOneDepartment = addOneDepartment
@@ -13,3 +15,4 @@ module.exports.updateOneDepartment = updateOneDepartment
 module.exports.getDepartmentsWithAccounts=getDepartmentsWithAccounts
 module.exports.activateAccountToDepartment=activateAccountToDepartment
 module.exports.deleteAccountToDepartment=deleteAccountToDepartment
+module.exports.getDepartmentsListByAccountID=getDepartmentsListByAccountID

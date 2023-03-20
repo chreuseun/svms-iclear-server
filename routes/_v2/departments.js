@@ -9,6 +9,7 @@ const {
     getDepartmentsWithAccounts,
     deleteAccountToDepartment,
     activateAccountToDepartment,
+    getDepartmentsListByAccountID
 } = require('../../handlers/department')
 const departmentsRouter =express.Router()
 
@@ -17,6 +18,8 @@ const departmentsRouter =express.Router()
 departmentsRouter.get('/types', getDepartmentTypes)
 departmentsRouter.get('/', getAllDepartmentsByFilter)
 departmentsRouter.get('/accounts', getDepartmentsWithAccounts)
+departmentsRouter.get('/account', getDepartmentsListByAccountID)
+
 
 // POST METHODS
 departmentsRouter.post('/add', addOneDepartment)
