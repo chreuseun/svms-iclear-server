@@ -9,6 +9,9 @@ const validateJWTToken = (authorizationToken = null) => {
     const jwt = decodeJWTToken(jwtToken)
 
     if(!jwt) throw new Error('Invalid Authorization Token')
+    else{
+        return jwt
+    }
 
 }
 
