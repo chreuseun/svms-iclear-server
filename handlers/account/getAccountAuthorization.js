@@ -21,16 +21,13 @@ const getAccountAuthorization = async (request, response) => {
             params: [account_id]
         })
 
-
-        const accountDetails   =results_sql?.[0]||{}
+        const accountDetails = results_sql?.[0] || null
     
-        
         response.json({
             success: success_sql,
             error_message: error_message_sql,
             data: {
                 accountDetails,
-                departments:[]
             },
         });
     }catch(err){
