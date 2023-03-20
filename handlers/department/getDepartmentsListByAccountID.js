@@ -15,7 +15,7 @@ const getDepartmentsListByAccountID = async (request, response ) => {
     try{
         const jwtToken =request?.headers?.authorization
         const validatedJWT = validateJWTToken(jwtToken)
-        const { id: accountID = null } = validatedJWT
+        const { id: accountID = null ,user_type_id: userTypeID = null} = validatedJWT
 
        const {
             error_message_sql,
@@ -23,7 +23,10 @@ const getDepartmentsListByAccountID = async (request, response ) => {
             success_sql
         } =  await mySQLCommander({
             sqlQuery: GET_DEPARTMENT_LIST_BY_ACCOUNT_ID,
-            params: [accountID]
+            params: [
+                accountID,
+                userTypeID
+            ]
         })
         
         response.json({

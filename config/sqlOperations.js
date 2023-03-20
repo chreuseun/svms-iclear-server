@@ -394,6 +394,7 @@ JOIN account AS a
 	ON a.id = v2ad.account_id 
 		AND a.id = ?
         AND v2ad.is_deleted = 0
+        AND a.user_type_id = ?
 JOIN v2_departments as v2d ON
 	v2ad.v2_department_id = v2d.id
     AND v2d.is_active = 1
