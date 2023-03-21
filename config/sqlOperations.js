@@ -405,6 +405,26 @@ JOIN educ_level AS el ON
     el.id = v2d.educ_level_id
 `
 
+const INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD = `
+INSERT INTO 
+    v2_department_clearance_requirement
+(
+    v2_departments_id, 
+    creator_account_id, 
+    initial_status, 
+    name,
+    description
+) 
+
+VALUES (
+    ?,
+    ?,
+    ?,
+    ?,
+    ?
+)
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -427,5 +447,6 @@ module.exports = {
     UPDATE_ACADEMIC_YEAR_BY_ID,
     BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY,
     GET_ACCOUNT_DETAILS,
-    GET_DEPARTMENT_LIST_BY_ACCOUNT_ID
+    GET_DEPARTMENT_LIST_BY_ACCOUNT_ID,
+    INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD
 }
