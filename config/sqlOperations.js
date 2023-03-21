@@ -387,7 +387,8 @@ SELECT
     v2d.department_head_officer,
     v2d.educ_level_id,
     v2d.department_type_id,
-    dt.name as department_type_name
+    dt.name as department_type_name,
+    el.name AS educ_level_name
 
 FROM v2_account_departments as v2ad
 JOIN account AS a
@@ -399,7 +400,9 @@ JOIN v2_departments as v2d ON
 	v2ad.v2_department_id = v2d.id
     AND v2d.is_active = 1
 JOIN departments_type AS dt ON
-    dt.id = v2d.department_type_id;
+    dt.id = v2d.department_type_id
+JOIN educ_level AS el ON
+    el.id = v2d.educ_level_id
 `
 
 module.exports = {
