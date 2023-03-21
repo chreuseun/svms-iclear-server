@@ -11,7 +11,7 @@ const coursesRouter = require('./routes/_v2/courses');
 const semesterRouter = require('./routes/_v2/semester');
 const academicYearsRouter = require('./routes/_v2/academicYears');
 const studentRouter = require('./routes/_v2/student');
-
+const departmentClearance = require('./routes/_v2/departmentClearance');
 
 const ip_v4 = ipAdd;
 const app = express();
@@ -57,6 +57,7 @@ app.use(v2, coursesRouter)
 app.use(v2, semesterRouter)
 app.use(v2, academicYearsRouter)
 app.use(v2, studentRouter)
+app.use(v2, departmentClearance)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{

@@ -1,0 +1,3 @@
+const addOneDepartmentClearanceRequirementRecord = require('./addOneDepartmentClearanceRequirementRecord')
+
+module.exports.addOneDepartmentClearanceRequirementRecord = addOneDepartmentClearanceRequirementRecord
