@@ -2,7 +2,9 @@ const express = require('express')
 
 const {ROUTERS} = require('../../config/routers')
 const departmentClearanceRouter =express.Router()
-const {addOneDepartmentClearanceRequirementRecord} = require('../../handlers/departmentClearance')
+const {addOneDepartmentClearanceRequirementRecord,getDepartmentClearanceRecord} = require('../../handlers/departmentClearance')
+
+departmentClearanceRouter.get('/', getDepartmentClearanceRecord)
 
 departmentClearanceRouter.post('/add-one-record', addOneDepartmentClearanceRequirementRecord)
 

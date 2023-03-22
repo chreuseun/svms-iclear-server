@@ -425,6 +425,34 @@ VALUES (
 )
 `
 
+const GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID = `
+SELECT 
+    v2DeptClr.*,
+    v2DeptClr.id as 'key'
+
+FROM v2_department_clearance_requirement AS v2DeptClr
+
+WHERE v2_departments_id = ?;
+`
+
+const GET_ACTIVE_SEMESTER_AND_ACADEMIC_YEAR = `
+SELECT 
+	'v2_semester' as table_name,
+    id,
+    name 
+FROM v2_semester
+WHERE is_active = 1
+
+UNION
+
+SELECT 
+	'v2_academic_year' as table_name,
+    id,
+	name 
+FROM v2_academic_year
+WHERE is_active = 1
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -448,5 +476,7 @@ module.exports = {
     BULK_UPSERT_STUDENTS_BY_DUPLICATE_KEY,
     GET_ACCOUNT_DETAILS,
     GET_DEPARTMENT_LIST_BY_ACCOUNT_ID,
-    INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD
+    INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD,
+    GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID,
+    GET_ACTIVE_SEMESTER_AND_ACADEMIC_YEAR
 }
