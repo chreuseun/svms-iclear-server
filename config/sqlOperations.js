@@ -413,10 +413,16 @@ INSERT INTO
     creator_account_id, 
     initial_status, 
     name,
-    description
+    description,
+    type,
+    v2_semester_id,
+    v2_academic_year_id
 ) 
 
 VALUES (
+    ?,
+    ?,
+    ?,
     ?,
     ?,
     ?,

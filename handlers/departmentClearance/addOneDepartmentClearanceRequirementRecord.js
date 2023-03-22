@@ -18,7 +18,10 @@ const addOneDepartmentClearanceRequirementRecord =  async ( request, response ) 
             v2_departments_id,
             initial_status,
             name,
-            description
+            description,
+            type,
+            v2_semester_id = 0,
+            v2_academic_year_id = 0
         } = request?.body || {}
 
        const {
@@ -27,11 +30,14 @@ const addOneDepartmentClearanceRequirementRecord =  async ( request, response ) 
         success_sql
        } =  await mySQLCommander({
             params:[
-                 v2_departments_id,
+                v2_departments_id,
                 creatorAccountId,
                 initial_status,
                 name,
-                description 
+                description,
+                type,
+                v2_semester_id,
+                v2_academic_year_id
             ],
             sqlQuery: INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD
         });
