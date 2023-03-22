@@ -357,8 +357,6 @@ ON DUPLICATE KEY UPDATE
     year_level = VALUES(year_level)    
 `
 
-
-
 const GET_ACCOUNT_DETAILS = `
 SELECT 
     id,         
@@ -459,6 +457,82 @@ FROM v2_academic_year
 WHERE is_active = 1
 `
 
+const GET_ALL_DEPARTMENT_CLEARANCE_RECORD_OF_STUDENT = `
+SELECT 
+	std.id AS student_id,
+    std.username AS student_username,
+    std.stud_lastname AS student_lastname,
+	std.stud_firstname AS student_firstname,
+	std.stud_middlename AS student_middlename,
+    std.year_level AS student_yearlevel,
+    std.course_id AS student_course_id,
+    '' AS '--DEPARTMENT_DETAILS--',
+	v2Dept.id AS dept_id,
+	v2Dept.name AS dept_name,
+	v2Dept.educ_level_id AS educ_level_id,
+	v2Dept.course_id AS course,
+    v2Dept.department_type_id,
+	v2Dept.year_level,
+	v2Dept.acad_dept_id,
+    el.name as educ_level_name,
+    deptType.name as dept_type_name,
+    c.id AS course_id,
+    c.acad_dept AS acad_dept_id,
+    '' as '--CLEARANCE_DETAILS--',
+	v2DeptClrReq.*
+    
+FROM v2_department_clearance_requirement AS v2DeptClrReq
+JOIN v2_departments AS v2Dept ON
+	v2DeptClrReq.v2_departments_id = v2Dept.id
+    AND v2DeptClrReq.v2_departments_id = ?
+JOIN educ_level AS el ON
+	el.id = v2Dept.educ_level_id
+JOIN departments_type AS deptType ON
+	deptType.id = v2Dept.department_type_id
+LEFT JOIN course AS c ON
+	c.id = v2Dept.course_id
+JOIN v2_students AS std ON
+	std.educ_level_id = v2Dept.educ_level_id
+    AND IF(v2Dept.year_level = '*',true, std.year_level = v2Dept.year_level)
+	AND IF(v2Dept.course_id = '*',true, std.course_id = v2Dept.course_id)
+	AND IF(v2Dept.acad_dept_id = '*',true, std.acad_dept = v2Dept.acad_dept_id)
+`
+
+const INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT = `
+SET @v2_dept_clearance_id := ?;
+SET @dept_course_id := ?;
+SET @dept_acad_id := ?;
+SET @educ_level_id := ?;
+
+INSERT IGNORE v2_students_department_clearance_record 
+(
+    unique_id,
+	v2_students_id,
+	v2_department_clearance_requirement_id,
+	status
+)  
+SELECT 
+    CONCAT(std.id,"-",@v2_dept_clearance_id) AS id,
+	std.id as student_id,
+    @v2_dept_clearance_id AS v2_dept_clearance_id,
+    'APPROVED' AS status
+
+ FROM v2_students AS std
+ 
+ WHERE
+	educ_level_id = @educ_level_id
+	AND IF(
+		@dept_course_id = '*',
+		true, 
+		std.course_id = @dept_course_id
+	)
+    AND IF(
+		@dept_acad_id = '*',
+		true, 
+		std.acad_dept = @dept_acad_id
+	)
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -484,5 +558,7 @@ module.exports = {
     GET_DEPARTMENT_LIST_BY_ACCOUNT_ID,
     INSERT_ONE_V2_DEPARTMENT_CLEARANCE_REQUIREMENT_RECORD,
     GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID,
-    GET_ACTIVE_SEMESTER_AND_ACADEMIC_YEAR
+    GET_ACTIVE_SEMESTER_AND_ACADEMIC_YEAR,
+    GET_ALL_DEPARTMENT_CLEARANCE_RECORD_OF_STUDENT,
+    INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT
 }
