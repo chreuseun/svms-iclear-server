@@ -75,11 +75,22 @@ const addOneDepartmentClearanceRequirementRecord =  async ( request, response ) 
             sqlQuery: INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT
         });
 
+        const {affectedRows,message,} = bulkInsertSQLResult?.[4] || null
+
         response.json({
             success: success_sql && bulkInsertSuccess,
             error_message: `${error_message_sql}# ${bulkInsertErrorMessage}`,
             data: {
-                bulkInsertSQLResult,
+                bulkInsertSQLResult:{
+                    affectedRows,
+                    message,
+                    params:[
+                        results_sql?.insertId || null ,
+                        deptCourseID , 
+                        deptAcadID , 
+                        deptEducLevelID
+                    ]
+                },
                 results_sql
             },
         });

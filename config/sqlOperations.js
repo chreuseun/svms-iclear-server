@@ -533,6 +533,16 @@ SELECT
 	)
 `
 
+const GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER = `
+SELECT 
+	v2DepClrReq.name AS requirement_name,
+    v2StdDeptClrRec.*
+    
+FROM v2_students_department_clearance_record AS v2StdDeptClrRec 
+JOIN v2_department_clearance_requirement AS v2DepClrReq 
+	ON v2DepClrReq.id = v2StdDeptClrRec.v2_department_clearance_requirement_id
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -560,5 +570,6 @@ module.exports = {
     GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID,
     GET_ACTIVE_SEMESTER_AND_ACADEMIC_YEAR,
     GET_ALL_DEPARTMENT_CLEARANCE_RECORD_OF_STUDENT,
-    INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT
+    INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT,
+    GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER
 }
