@@ -539,7 +539,8 @@ SELECT
     v2Std.stud_lastname,
     v2Std.stud_middlename,
 	v2DepClrReq.name AS requirement_name,
-    v2StdDeptClrRec.*
+    v2StdDeptClrRec.*,
+    a.fullname AS updated_by_name
     
 FROM v2_students_department_clearance_record AS v2StdDeptClrRec 
 JOIN v2_department_clearance_requirement AS v2DepClrReq 
@@ -547,6 +548,9 @@ JOIN v2_department_clearance_requirement AS v2DepClrReq
     AND v2StdDeptClrRec.v2_department_clearance_requirement_id = ?
 	JOIN v2_students AS v2Std 
 		ON v2Std.id = v2StdDeptClrRec.v2_students_id
+    LEFT JOIN account AS a
+        ON a.id = v2StdDeptClrRec.account_id_update_by
+    
 
 `
 
@@ -554,7 +558,8 @@ const UPDATE_STUDENT_DEPT_CLEARANCE_RECORD_BY_ID = `
 UPDATE v2_students_department_clearance_record
 
 SET 
-	status = ?
+	status = ? ,
+    account_id_update_by = ?
 
 WHERE id = ?
 `

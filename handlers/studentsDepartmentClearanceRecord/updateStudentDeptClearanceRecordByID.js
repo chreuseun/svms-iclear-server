@@ -11,14 +11,13 @@ const updateStudentDeptClearanceRecordByID =  async ( request, response ) => {
 
     try{
         const jwtToken =request?.headers?.authorization
-        validateJWTToken(jwtToken)
+       const decodedJWT = validateJWTToken(jwtToken)
 
         const {
             v2_students_department_clearance_record_id,
-            status
+            status,
+
         } = request?.body || {}
-
-
 
        const {
         error_message_sql,
@@ -27,11 +26,11 @@ const updateStudentDeptClearanceRecordByID =  async ( request, response ) => {
        } =  await mySQLCommander({
             params:[
                 status,
-                v2_students_department_clearance_record_id
+                decodedJWT?.id,
+                v2_students_department_clearance_record_id,
             ],
             sqlQuery: UPDATE_STUDENT_DEPT_CLEARANCE_RECORD_BY_ID
         });
-
 
         response.json({
             success: success_sql,
