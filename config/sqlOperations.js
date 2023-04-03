@@ -431,11 +431,13 @@ VALUES (
 
 const GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID = `
 SELECT 
-    v2DeptClr.*,
-    v2DeptClr.id as 'key'
-
+	a.fullname AS creator_fullname,
+	v2DeptClr.*
+    
 FROM v2_department_clearance_requirement AS v2DeptClr
-
+LEFT JOIN account as a 
+	ON a.id = v2DeptClr.creator_account_id
+    
 WHERE v2_departments_id = ?;
 `
 
