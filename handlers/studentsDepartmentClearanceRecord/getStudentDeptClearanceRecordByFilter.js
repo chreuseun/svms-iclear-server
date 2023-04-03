@@ -18,10 +18,11 @@ const getStudentDeptClearanceRecordByFilter = async ( request , response ) => {
 
         const {query} = request
         const  {
+            v2_students_department_clearance_record
         } = query || {}
           
-        let sqlQuery = GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER
         let params = [
+            v2_students_department_clearance_record
         ]
 
    
@@ -29,7 +30,12 @@ const getStudentDeptClearanceRecordByFilter = async ( request , response ) => {
             results_sql, 
             success_sql,
             error_message_sql
-        } = await mySQLCommander({sqlQuery, params})
+        } = await mySQLCommander({
+            sqlQuery:GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER, 
+            params
+        })
+
+        console.log('--v2_students_department_clearance_record:',v2_students_department_clearance_record)
 
      
 
