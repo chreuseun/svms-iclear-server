@@ -535,12 +535,19 @@ SELECT
 
 const GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER = `
 SELECT 
+	v2Std.stud_firstname,
+    v2Std.stud_lastname,
+    v2Std.stud_middlename,
 	v2DepClrReq.name AS requirement_name,
     v2StdDeptClrRec.*
     
 FROM v2_students_department_clearance_record AS v2StdDeptClrRec 
 JOIN v2_department_clearance_requirement AS v2DepClrReq 
-	ON v2DepClrReq.id = v2StdDeptClrRec.v2_department_clearance_requirement_id
+	ON v2DepClrReq.id = v2StdDeptClrRec.v2_department_clearance_requirement_id 
+    AND v2StdDeptClrRec.v2_department_clearance_requirement_id = ?
+	JOIN v2_students AS v2Std 
+		ON v2Std.id = v2StdDeptClrRec.v2_students_id
+
 `
 
 module.exports = {
