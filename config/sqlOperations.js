@@ -431,13 +431,19 @@ VALUES (
 
 const GET_DEPARTMENT_CLEARANCE_REQUIREMENT_BY_DEPARTMENT_ID = `
 SELECT 
+	v2sem.name AS semester_name,
+	v2ay.name AS academic_year_name,
 	a.fullname AS creator_fullname,
 	v2DeptClr.*
     
 FROM v2_department_clearance_requirement AS v2DeptClr
 LEFT JOIN account as a 
 	ON a.id = v2DeptClr.creator_account_id
-    
+LEFT JOIN v2_academic_year AS v2ay
+	ON v2ay.id = v2DeptClr.v2_academic_year_id
+LEFT JOIN v2_semester AS v2sem
+	ON v2sem.id = v2DeptClr.v2_semester_id
+
 WHERE v2_departments_id = ?;
 `
 
