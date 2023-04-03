@@ -23,7 +23,7 @@ const asyncMySQLOperation = ({ sql = null,params = []} = {}) => {
                         resolve(results)
                     })
                 }catch(mysqlPoolConnectionError){
-                    reject( new Error(`MYSQL_POOL_CONNETION: ${queryError}`));
+                    reject( new Error(`MYSQL_POOL_CONNETION: ${mysqlPoolConnectionError}`));
                 }
             })
 
