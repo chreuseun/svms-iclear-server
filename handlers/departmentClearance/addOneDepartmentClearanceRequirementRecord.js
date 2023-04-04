@@ -67,15 +67,18 @@ const addOneDepartmentClearanceRequirementRecord =  async ( request, response ) 
         success_sql: bulkInsertSuccess,
        } =  await mySQLCommander({
             params:[
-                results_sql?.insertId || null ,
-                deptCourseID , 
-                deptAcadID , 
-                deptEducLevelID
+                results_sql?.insertId || null,
+                deptCourseID, 
+                deptAcadID, 
+                deptEducLevelID,
+                initial_status,
+                v2_semester_id,
+                v2_academic_year_id
             ],
             sqlQuery: INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT
         });
 
-        const {affectedRows,message,} = bulkInsertSQLResult?.[4] || null
+        const {affectedRows,message,} = bulkInsertSQLResult?.[7] || null
 
         response.json({
             success: success_sql && bulkInsertSuccess,

@@ -521,6 +521,9 @@ SET @v2_dept_clearance_id := ?;
 SET @dept_course_id := ?;
 SET @dept_acad_id := ?;
 SET @educ_level_id := ?;
+SET @status := ?;
+SET @sem_id := ?;
+SET @acad_id := ?; 
 
 INSERT IGNORE v2_students_department_clearance_record 
 (
@@ -533,9 +536,22 @@ SELECT
     CONCAT(std.id,"-",@v2_dept_clearance_id) AS id,
 	std.id as student_id,
     @v2_dept_clearance_id AS v2_dept_clearance_id,
-    'APPROVED' AS status
+    @status AS status
+    
+--     std.current_semester_id,
+--     std.current_academic_year_id,
+--     std.is_graduated,
+--     std.semester_id,
+--     std.acad_year_id,
+--     v2sem.id AS v2_semester_id,
+--     v2ay.id AS v2_academic_year_id
+    
 
  FROM v2_students AS std
+ LEFT JOIN v2_academic_year AS v2ay
+	ON v2ay.name = std.acad_year_id
+ LEFT JOIN v2_semester AS v2sem
+	ON v2sem.name = std.semester_id
  
  WHERE
 	educ_level_id = @educ_level_id
@@ -548,6 +564,16 @@ SELECT
 		@dept_acad_id = '*',
 		true, 
 		std.acad_dept = @dept_acad_id
+	)
+    AND IF(
+		@sem_id = '*',
+		true, 
+		v2sem.id = @sem_id
+	)
+	AND IF(
+		@acad_id = '*',
+		true, 
+		v2ay.id = @acad_id
 	)
 `
 
