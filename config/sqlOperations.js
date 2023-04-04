@@ -330,6 +330,11 @@ INSERT v2_students(
     course_id,
     year_level,
     section,
+    acad_year_id,
+    semester_id,
+    current_academic_year_id,
+    current_semester_id,
+    is_graduated,
     username
 )
 
@@ -354,7 +359,12 @@ ON DUPLICATE KEY UPDATE
     stud_lastname = VALUES(stud_lastname),
     stud_middlename = VALUES(stud_middlename),
     username = VALUES(username),
-    year_level = VALUES(year_level)    
+    year_level = VALUES(year_level),
+    semester_id = VALUES(semester_id),
+    acad_year_id = VALUES(acad_year_id),
+    current_semester_id = VALUES(current_semester_id),
+    current_academic_year_id = VALUES(current_academic_year_id),
+    is_graduated = VALUES(is_graduated)
 `
 
 const GET_ACCOUNT_DETAILS = `
