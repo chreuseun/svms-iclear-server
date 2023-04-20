@@ -608,6 +608,23 @@ SET
 WHERE id = ?
 `
 
+
+const INSERT_ONE_ROW_V2_VIOLATIONS  = `
+INSERT INTO 
+    v2_violations (
+        name, 
+        level,
+        type,
+        educ_level_id
+    ) 
+VALUES (
+    ?,
+    ?,
+    ?,
+    ?
+);
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -637,5 +654,6 @@ module.exports = {
     GET_ALL_DEPARTMENT_CLEARANCE_RECORD_OF_STUDENT,
     INSERT_SELECT_BULK_DEPT_CLEARANCE_REQUIREMENT,
     GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER,
-    UPDATE_STUDENT_DEPT_CLEARANCE_RECORD_BY_ID
+    UPDATE_STUDENT_DEPT_CLEARANCE_RECORD_BY_ID,
+    INSERT_ONE_ROW_V2_VIOLATIONS
 }

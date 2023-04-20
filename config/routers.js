@@ -8,6 +8,8 @@ const ROUTERS = {
     student: '/student',
     departmentClearance: '/department-clearance',
     studentDepartmentClearanceRecord: '/student-department-clearance-record',
+    violations: '/violations',
+
 }
 
 module.exports = {
