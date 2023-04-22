@@ -615,9 +615,11 @@ INSERT INTO
         name, 
         level,
         type,
-        educ_level_id
+        educ_level_id,
+        description
     ) 
 VALUES (
+    ?,
     ?,
     ?,
     ?,
@@ -630,7 +632,7 @@ SELECT
     * 
 FROM v2_violations
 
-WHERE educ_level_id = ?;
+WHERE educ_level_id = ?
 `
 
 module.exports = {

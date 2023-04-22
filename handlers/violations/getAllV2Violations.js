@@ -17,10 +17,13 @@ const getAllV2Violations = async ( request , response ) => {
 
         const { query } = request
         const  {
-            educ_level_id = ''
+            educ_level_id = '',
+            is_active = true
         } = query || {}
+
         let params = [
-            educ_level_id
+            educ_level_id,
+            is_active
         ]
 
         const {
