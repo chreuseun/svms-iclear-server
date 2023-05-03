@@ -635,6 +635,20 @@ FROM v2_violations
 WHERE educ_level_id = ?
 `
 
+const GET_V2_VIOLATION_STUDENTS = `
+SELECT 
+	v2Std.stud_firstname,
+    v2Std.stud_lastname,
+    v2Std.stud_middlename,
+    v2Std.username,
+    v2Std.id
+    
+
+FROM v2_students AS v2Std
+
+WHERE v2Std.educ_level_id = ?
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -666,5 +680,6 @@ module.exports = {
     GET_STUDENT_DEPT_CLEARANCE_RECORD_BY_FILTER,
     UPDATE_STUDENT_DEPT_CLEARANCE_RECORD_BY_ID,
     INSERT_ONE_ROW_V2_VIOLATIONS,
-    GET_ALL_V2_VIOLATIONS
+    GET_ALL_V2_VIOLATIONS,
+    GET_V2_VIOLATION_STUDENTS,
 }
