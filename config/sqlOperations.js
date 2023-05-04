@@ -649,6 +649,16 @@ FROM v2_students AS v2Std
 WHERE v2Std.educ_level_id = ?
 `
 
+const GET_STUDENT_BY_USERNAME = `
+SELECT 
+    *
+FROM v2_students
+
+WHERE username = ?
+
+LIMIT 1
+`
+
 module.exports = {
     INSERT_ONE_ACCOUNT,
     SELECT_USERS_BY_FILTER_NO_DATES,
@@ -682,4 +692,5 @@ module.exports = {
     INSERT_ONE_ROW_V2_VIOLATIONS,
     GET_ALL_V2_VIOLATIONS,
     GET_V2_VIOLATION_STUDENTS,
+    GET_STUDENT_BY_USERNAME,
 }

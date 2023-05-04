@@ -9,9 +9,13 @@ const ROUTERS = {
     departmentClearance: '/department-clearance',
     studentDepartmentClearanceRecord: '/student-department-clearance-record',
     violations: '/violations',
+}
 
+const STUDENT_ROUTER = {
+    student_accounts: '/student/account'
 }
 
 module.exports = {
-    ROUTERS
+    ROUTERS,
+    STUDENT_ROUTER
 }
